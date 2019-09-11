@@ -5,7 +5,7 @@ module.exports = {
 }
 
 function find() {
-  //calling find returns promise that resolves to an array of all schemas in db
+  //calling find returns promise that resolves to an array of all schemas
   return db('schemes')
 }
 
