@@ -1,30 +1,26 @@
 const db = require("../data/db-config");
 
 module.exports = {
-    find,
-    findById,
-    findSteps,
-    add,
-    update,
-    remove
-}
+  find,
+  findById,
+  findSteps,
+  add,
+  update,
+  remove
+};
 
 function find() {
   //calling find returns promise that resolves to an array of all schemas
-  return db('schemes')
+  return db("schemes");
 }
 
 function findById(id) {
   //expects a scheme id as parameter
   //resolve to a single scheme object
   //on an invalid id, resolves to null
-  if(id){return db('schemes')
-  .where({ id })
-  .then(scheme => {
-      return scheme
-  })} else {
-      return null
-  }
+  return db("schemes")
+    .where({ id })
+    .first();
 }
 
 function findSteps(id) {
