@@ -1,5 +1,12 @@
+const db = require("../data/db-config");
+
+module.exports = {
+    find
+}
+
 function find() {
   //calling find returns promise that resolves to an array of all schemas in db
+  return db('schemes')
 }
 
 function findById(id) {
