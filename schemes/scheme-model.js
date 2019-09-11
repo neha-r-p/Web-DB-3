@@ -18,6 +18,13 @@ function findById(id) {
   //expects a scheme id as parameter
   //resolve to a single scheme object
   //on an invalid id, resolves to null
+  if(id){return db('schemes')
+  .where({ id })
+  .then(scheme => {
+      return scheme
+  })} else {
+      return null
+  }
 }
 
 function findSteps(id) {
