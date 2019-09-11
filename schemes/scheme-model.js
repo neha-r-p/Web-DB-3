@@ -16,23 +16,27 @@ function find() {
 function findById(id) {
   return db("schemes")
     .where({ id })
-    .first();
+    .first()
+    .then(scheme => {
+      return scheme;
+    });
 }
 
 function findSteps(id) {
-  return db('schemes as s')
-  .join('steps as st', 's.id', 'st.scheme_id')
-  .where({ scheme_id: id })
-  .select('st.id', 's.scheme_name', 'st.step_number', 'st.instructions')
-  .then(steps => {
+  return db("schemes as s")
+    .join("steps as st", "s.id", "st.scheme_id")
+    .where({ scheme_id: id })
+    .select("st.id", "s.scheme_name", "st.step_number", "st.instructions")
+    .then(steps => {
       return steps;
-  })
+    });
 }
 
 function add(scheme) {
-  //     Expects a scheme id.
-  // Resolves to an array of all correctly ordered step for the given scheme: [ { id: 17, scheme_name: 'Find the Holy Grail', step_number: 1, instructions: 'quest'}, { id: 18, scheme_name: 'Find the Holy Grail', step_number: 2, instructions: '...and quest'}, etc. ].
-  // This array should include the scheme_name not the scheme_id.
+  return db("schemes")
+    .insert(scheme)
+    .then(scheme => {return scheme})
+  ;
 }
 
 function update(changes, id) {
