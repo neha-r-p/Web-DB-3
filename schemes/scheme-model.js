@@ -35,19 +35,19 @@ function findSteps(id) {
 function add(scheme) {
   return db("schemes")
     .insert(scheme)
-    .then(scheme => {return scheme})
-  ;
+    .then(scheme => {
+      return scheme;
+    });
 }
 
 function update(changes, id) {
   return db("schemes")
-  .where("id", id)
-  .update(changes)
+    .where("id", id)
+    .update(changes);
 }
 
 function remove(id) {
-  //     Removes the scheme object with the provided id.
-  // Resolves to the removed scheme
-  // Resolves to null on an invalid id.
-  // (Hint: Only worry about removing the scheme. The database is configured to automatically remove all associated steps.)
+  return db("schemes")
+    .where("id", id)
+    .del();
 }
