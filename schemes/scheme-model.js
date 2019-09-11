@@ -10,23 +10,23 @@ module.exports = {
 };
 
 function find() {
-  //calling find returns promise that resolves to an array of all schemas
   return db("schemes");
 }
 
 function findById(id) {
-  //expects a scheme id as parameter
-  //resolve to a single scheme object
-  //on an invalid id, resolves to null
   return db("schemes")
     .where({ id })
     .first();
 }
 
 function findSteps(id) {
-  // Expects a scheme id.
-  // Resolves to an array of all correctly ordered step for the given scheme: [ { id: 17, scheme_name: 'Find the Holy Grail', step_number: 1, instructions: 'quest'}, { id: 18, scheme_name: 'Find the Holy Grail', step_number: 2, instructions: '...and quest'}, etc. ].
-  // This array should include the scheme_name not the scheme_id.
+  return db('schemes as s')
+  .join('steps as st', 's.id', 'st.scheme_id')
+  .where({ scheme_id: id })
+  .select('st.id', 's.scheme_name', 'st.step_number', 'st.instructions')
+  .then(steps => {
+      return steps;
+  })
 }
 
 function add(scheme) {
